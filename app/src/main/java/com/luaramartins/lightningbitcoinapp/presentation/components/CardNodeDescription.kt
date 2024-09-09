@@ -9,6 +9,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
@@ -18,6 +23,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import com.airbnb.lottie.LottieComposition
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.luaramartins.lightningbitcoinapp.R
 import com.luaramartins.lightningbitcoinapp.presentation.detailsview.NodeDetails
 import com.luaramartins.lightningbitcoinapp.ui.theme.CORNER_RADIUS_16
@@ -28,6 +38,32 @@ import com.luaramartins.lightningbitcoinapp.ui.theme.MEDIUM_PADDING
 
 @Composable
 fun CardNodeDescription(node: NodeDetails) {
+
+    val composition: LottieComposition? by rememberLottieComposition(
+        LottieCompositionSpec.RawRes(R.raw.bitcoin_animation)
+    )
+    var isPlaying by remember { mutableStateOf(true) }
+
+    val progress by animateLottieCompositionAsState(
+        composition = composition,
+        isPlaying = isPlaying
+    )
+
+    LaunchedEffect(key1 = progress) {
+        if (progress == 0f){
+            isPlaying = true
+
+        }
+        if (progress == 1f){
+            isPlaying = false
+        }
+
+    }
+
+    LaunchedEffect(key1 = node) {
+        isPlaying = true
+    }
+
 
     Card(
         modifier = Modifier
@@ -63,9 +99,9 @@ fun CardNodeDescription(node: NodeDetails) {
                 inputCountry
             ) = createRefs()
 
-            Image(
-                painter = painterResource(id = R.drawable.ic_bitcoin),
-                contentDescription = null,
+            LottieAnimation(
+                composition = composition,
+                progress = { progress },
                 modifier = Modifier
                     .constrainAs(imgBitcoin) {
                         top.linkTo(parent.top, 0.dp)
@@ -74,8 +110,6 @@ fun CardNodeDescription(node: NodeDetails) {
                     }
                     .size(64.dp)
             )
-
-
 
             Text(
                 text = stringResource(id = R.string.public_key),
