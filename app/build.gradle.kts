@@ -72,4 +72,7 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.4.0")
 
     implementation("androidx.compose.runtime:runtime-livedata:1.0.0-beta01")
+
+    implementation ("com.airbnb.android:lottie-compose:6.0.0")
+
 }

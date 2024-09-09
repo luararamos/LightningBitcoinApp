@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">LightningBitcoinApp</string>
+    <string name="list_nodes">Lista de Nodes</string>
+    <string name="public_key">Chave pública:  </string>
+    <string name="alias">Nome node:  </string>
+    <string name="channels">Nº Canais:  </string>
+    <string name="capacity">Bitcoins por Canais:  </string>
+    <string name="firstSeen">Postado:  </string>
+    <string name="updatedAt">Atualizado:  </string>
+    <string name="city">Cidade:  </string>
+    <string name="country">País:  </string>
 </resources>
