@@ -34,7 +34,7 @@ Teria feito mais testes e corrigiria expansões do card de detalhes.
 ## ➕⏰ O que você acha que é a parte mais fraca do seu projeto?
 Tive dificuldade em valores que retornavam nulos na localização do lightning.
 
-#c 🎆 Há mais alguma informação que você gostaria que soubéssemos?
+## 🎆 Há mais alguma informação que você gostaria que soubéssemos?
 Criei uma animação da mola da marca Bipa em formato json próprio para código para melhorar o layout do meu aplicativo.
 
 ##  👩‍💻 Author
