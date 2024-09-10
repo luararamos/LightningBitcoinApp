@@ -1,6 +1,7 @@
 package com.luaramartins.lightningbitcoinapp.presentation.screen
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,12 +10,15 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
@@ -29,25 +33,27 @@ import com.luaramartins.lightningbitcoinapp.ui.theme.FONT_32
 import com.luaramartins.lightningbitcoinapp.ui.theme.MEDIUM_PADDING
 import com.luaramartins.lightningbitcoinapp.ui.theme.SMALL_PADDING
 import com.luaramartins.lightningbitcoinapp.ui.theme.SUPER_PADDING
+import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun MainScreen() {
 
-    val nodeMock = NodeDetails(
-        publicKey = "03864ef025fde8fb587d989186ce6a4a186895ee44a926bfc370e2c366597a3f8f",
-        alias = "ACINQ",
-        channels = "2908",
-        capacity = "36010516297",
-        firstSeen = "1522941222",
-        updatedAt = "1661274935",
-        city = "Vancôver",
-        country = "EUA",
-
-        )
-
-    val listNodesMock = listOf(nodeMock, nodeMock, nodeMock, nodeMock, nodeMock)
-
+    val viewModel: MainViewModel = getViewModel()
+    val stateNode = viewModel.state.value
+    var nodeSelect by remember { mutableStateOf<NodeDetails?>(null) }
     var visibility by remember { mutableStateOf(false) }
+    var isDisplayDialog by remember { mutableStateOf(false) }
+
+    LaunchedEffect(key1 = true) {
+        viewModel.getNodeData()
+    }
+    LaunchedEffect(stateNode.error) {
+        if (stateNode.error.isNotBlank()) {
+            isDisplayDialog = true
+        }
+    }
+
+
     Column(
         modifier = Modifier.fillMaxWidth(),
     ) {
@@ -60,8 +66,8 @@ fun MainScreen() {
             fontSize = FONT_32,
             fontWeight = FontWeight.Bold,
         )
-        if (visibility) {
-            CardNodeDescription(node = nodeMock)
+        if (visibility && nodeSelect != null) {
+            CardNodeDescription(node = nodeSelect!!)
         } else {
             Spacer(modifier = Modifier.height(18.dp))
         }
@@ -76,16 +82,33 @@ fun MainScreen() {
         )
 
     }
-
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
     ) {
-        items(items = listNodesMock) { node ->
+
+        if (stateNode.isLoading) {
+            item {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(2.dp),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    CircularProgressIndicator()
+                }
+            }
+        }
+
+
+        items(items = stateNode.value) { node ->
+
             CardNode(
                 node = node,
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable {
+                        nodeSelect = node
                         visibility = true
                     }
 
