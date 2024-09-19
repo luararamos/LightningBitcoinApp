@@ -4,11 +4,13 @@ LightningBitcoinApp é uma solução inovadora para apaixonados por Bitcoin e Li
 ![gif_app_bipa](https://github.com/user-attachments/assets/6f6659c7-75a3-48aa-8b0c-a5e056c71b67)
 
 ## 🛠 Ferramentas de build e versões utilizadas
+- Arquitetura MVVM + Clean Architecture
 - Kotlin: 1.9.0
 - Koin: 3.4.0
 - Jetpack Compose:1.3.1
 - Lottie Compose: 6.0.0
 - Retrofit: 2.9.0
+- JUnit: 4.13.2
 - Gradle: 8.0.2
 - SDK:
    - compileSdk: 34
