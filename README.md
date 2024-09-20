@@ -17,15 +17,18 @@ LightningBitcoinApp é uma solução inovadora para apaixonados por Bitcoin e Li
    - minSdk: 24
 
 ## 📲 Passos para rodar o aplicativo
-Após baixar o projeto, você pode abrir com o Android Studio. Para isso, na tela de launcher clique em:
-
-Open an Existing Project (ou alguma opção similar) Procure o local onde o projeto está e o selecione (Caso o projeto seja baixado via zip, é necessário extraí-lo antes de procurá-lo) Por fim clique em OK O Android Studio deve executar algumas tasks do Gradle para configurar o projeto, aguarde até finalizar. Ao finalizar as tasks, você pode executar o App 🏆
+- Baixe o projeto.
+- Abra o Android Studio.
+- Clique em Open an Existing Project (ou alguma opção similar)
+- Procure o local onde o projeto está e o selecione (Caso o projeto seja baixado via zip, é necessário extraí-lo antes de procurá-lo)
+- Por fim clique em OK O Android Studio deve executar algumas tasks do Gradle para configurar o projeto, aguarde até finalizar.
+- Ao finalizar as tasks, você pode executar o App 🏆
 
 ## 🔍 Quais áreas do aplicativo você focou?
-O meu foco foi a integração de APIs e criação de layout.
+O meu foco foi a integração de APIs, criação de layout e tratamento de erros.
 
 ## 💡 Qual foi o motivo do seu foco? Quais problemas você estava tentando resolver?
-Foquei na requisição da API porque os dados eram a principal funcionalidade do aplicativo e no layout pois ele aproxima o aplicativo do usuário.
+Foquei na requisição da API porque os dados eram a principal funcionalidade do aplicativo, no layout pois ele aproxima o aplicativo do usuário e o tratamento de erros que evita crash
 
 ## ⏰ Quanto tempo você passou neste projeto?
 Foram necessárias 5h30 (cinco horas e trinta minutos) para o desenvolvimento do projeto
